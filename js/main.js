@@ -4,8 +4,8 @@ const products = [
   { id: 2, name: "New Collection", price: 67, img: "images/slider2.jpeg" },
   { id: 3, name: "New Collection", price: 98, img: "images/slider3.jpeg" },
   { id: 4, name: "Lipstick", price: 12.99, img: "images/lipstick.jpg" },
-  { id: 5, name: "Cherry", price: 12.99, img: "images/Cherry.jpg" },
-  { id: 6, name: "RedLipstick", price: 12.99, img: "images/RedLipstick.jpg" },
+  { id: 5, name: "Cherry", price: 12.99, img: "images/cherry.jpg" },
+  { id: 6, name: "RedLipstick", price: 12.99, img: "images/redlipstick.jpg" },
   { id: 7, name: "ShineLipstick", price: 12.99, img: "images/lipstick3.jpg" },
   { id: 8, name: "MagicMask", price: 24.50, img: "images/foundation.jpg" },
   { id: 10, name: "GoldenMask", price: 24.50, img: "images/foundation1.jpg" },
@@ -16,10 +16,10 @@ const products = [
   { id: 15, name: "YSL", price: 15.35, img: "images/blush1.jpg" },
   { id: 16, name: "ShineYSL", price: 15.75, img: "images/blush2.jpg" },
   { id: 17, name: "Golden Rose", price: 15.95, img: "images/blush3.jpg" },
-    { id: 18, name: "SkyHigh ", price: 19.75, img: "images/SkyHighMascara.jpeg" },
-  { id: 19, name: "YSL  ", price: 13.75, img: "images/YSL Mascara.jpeg" },
-  { id: 20, name: "Dior ", price: 18.75, img: "images/DiorMascara.jpeg" },
-    { id: 21, name: "Shiglam ", price: 16.75, img: "images/Shiglam.jpeg" },
+    { id: 18, name: "SkyHigh ", price: 19.75, img: "images/skyhighmascara.jpeg" },
+  { id: 19, name: "YSL  ", price: 13.75, img: "images/yslmascara.jpeg" },
+  { id: 20, name: "Dior ", price: 18.75, img: "images/diormascara.jpeg" },
+    { id: 21, name: "Shiglam ", price: 16.75, img: "images/shiglam.jpeg" },
 
 
 ];
@@ -318,3 +318,4 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
 });
 window.checkout=checkout;
+
