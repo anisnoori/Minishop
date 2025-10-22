@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact - MiniShop</title>
+
+  <!-- فایل‌های استایل -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body dir="ltr" data-page="contact">
+  <!-- هدر سایت -->
+  <header class="bg-light py-3 mb-4 shadow-sm">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+      <div class="logo h3" style="color:#b82f5f;font-family:'Poppins',sans-serif;font-weight:600;">
+        💄 Anis <span style="color:#e91e63;">MiniShop</span>
+      </div>
+      <nav class="mt-2 mt-md-0">
+        <a href="index.html" class="me-3">Home</a>
+        <a href="cart.html" class="me-3">Cart</a>
+        <a href="account.html" class="me-3">Account</a>
+        <a href="contact.html" class="me-3 active">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- بخش فرم تماس -->
+  <main class="container text-start">
+    <h2 class="mb-4 text-center fw-bold text-dark">Contact Us</h2>
+
+    <form id="contactForm" class="col-md-6 mx-auto shadow-sm p-4 rounded bg-light">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Message</label>
+        <textarea class="form-control" id="message" rows="4" placeholder="Type your message here..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Send Message</button>
+    </form>
+  </main>
+
+  <!-- فوتر سایت -->
+  <footer class="bg-light text-center py-3 mt-4">
+    <p>&copy; 2025 MiniShop. All rights reserved.</p>
+  </footer>
+
+  <!-- فایل‌های اسکریپت -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // ارسال فرم تماس
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Your message has been successfully sent!');
+      this.reset();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MiniShop - Makeup Store</title>
+
+  <!-- فایل استایل‌ها و فونت‌ها -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body dir="rtl">
+  <!-- هدر سایت -->
+  <header class="bg-light py-3 mb-4 shadow-sm">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+      <div class="logo h3">
+        💄 <span class="brand-gradient">Anis <strong>MiniShop</strong></span>
+      </div>
+      <nav class="mt-2 mt-md-0">
+        <button id="theme-toggle" class="btn btn-outline-dark btn-sm ms-2">🌓</button>
+        <a href="index.html" class="me-3 active">Home</a>
+        <a href="cart.html" class="me-3">Cart <span id="cart-badge" class="badge bg-danger ms-1">0</span></a>
+        <a href="account.html" class="me-3">Account</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- محتوای اصلی سایت -->
+  <main class="container">
+    <h1 class="text-center mb-4 welcome-title">
+      Welcome to <span class="text-highlight">Anis MiniShop</span>
+    </h1>
+
+    <!-- جستجو بین محصولات -->
+    <input id="search" class="form-control mb-4" placeholder="Search in Products..." dir="ltr">
+
+    <!-- اسلایدر محصولات -->
+    <div id="heroCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+      <div class="carousel-inner" id="slider-container"></div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+
+    <!-- لیست محصولات -->
+    <div class="row" id="product-list"></div>
+  </main>
+
+  <!-- بخش نمایش وضعیت آب‌وهوا -->
+  <section id="weather-section" class="text-center mt-5 mb-4">
+    <h4 class="fw-bold text-pink mb-3">Today's Weather</h4>
+    <div id="weather-box" class="p-3 rounded shadow-sm bg-light">
+      <p id="weather-status" class="text-muted">Detecting your location...</p>
+    </div>
+  </section>
+<!-- 💬 Customer Reviews Section -->
+<section id="comments-section" class="mt-5 mb-4 container">
+  <h4 class="fw-bold text-center text-pink mb-3">💬 Customer Reviews</h4>
+
+  <div id="comment-list" class="mb-4">
+    <!-- Comments will appear here -->
+  </div>
+
+  <form id="comment-form" class="p-3 rounded bg-light shadow-sm">
+    <h6 class="fw-semibold mb-3">Leave a Comment</h6>
+    <div class="mb-3">
+      <input type="text" id="comment-name" class="form-control" placeholder="Your name" required>
+    </div>
+    <div class="mb-3">
+      <textarea id="comment-text" class="form-control" rows="3" placeholder="Write your comment..." required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Post Comment</button>
+  </form>
+</section>
+<!-- 📊 Statistics Section -->
+<section id="stats" class="container text-center my-5">
+  <h4 class="fw-bold text-pink mb-4">Our Achievements 💖</h4>
+  <div class="row justify-content-center">
+    <div class="col-md-3 col-6 fade-in-section mb-4">
+      <h2 class="count text-pink fw-bold">1200</h2>
+      <p class="text-muted">Happy Customers</p>
+    </div>
+    <div class="col-md-3 col-6 fade-in-section mb-4">
+      <h2 class="count text-pink fw-bold">85</h2>
+      <p class="text-muted">Products</p>
+    </div>
+    <div class="col-md-3 col-6 fade-in-section mb-4">
+      <h2 class="count text-pink fw-bold">4500</h2>
+      <p class="text-muted">Orders Delivered</p>
+    </div>
+    <div class="col-md-3 col-6 fade-in-section mb-4">
+      <h2 class="count text-pink fw-bold">30</h2>
+      <p class="text-muted">Team Members</p>
+    </div>
+  </div>
+</section>
+
+  <!-- فوتر سایت -->
+  <footer class="footer bg-light text-center text-md-start py-5 mt-4" dir="ltr">
+    <div class="container">
+      <div class="row justify-content-between">
+
+        <!-- بخش لینک‌ها و شبکه‌های اجتماعی -->
+        <div class="col-lg-5 col-md-6 mb-4">
+          <h6 class="fw-bold mb-3 text-pink">Quick Links</h6>
+          <ul class="list-unstyled small text-start footer-links">
+            <li><a href="index.html" class="text-muted text-decoration-none d-flex align-items-center mb-2"><i class="bi bi-house-door me-3"></i> Home</a></li>
+            <li><a href="cart.html" class="text-muted text-decoration-none d-flex align-items-center mb-2"><i class="bi bi-bag-check me-3"></i> Cart</a></li>
+            <li><a href="account.html" class="text-muted text-decoration-none d-flex align-items-center mb-2"><i class="bi bi-person-circle me-3"></i> Account</a></li>
+            <li><a href="contact.html" class="text-muted text-decoration-none d-flex align-items-center mb-2"><i class="bi bi-envelope me-3"></i> Contact</a></li>
+          </ul>
+
+          <h6 class="fw-bold mb-3 mt-4 text-pink">Follow Us</h6>
+          <div class="social-links d-flex justify-content-start gap-3">
+            <a href="#" class="text-muted"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-muted"><i class="bi bi-telegram"></i></a>
+            <a href="#" class="text-muted"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" class="text-muted"><i class="bi bi-tiktok"></i></a>
+          </div>
+        </div>
+
+        <!-- بخش اطلاعات فروشگاه و فرم عضویت -->
+        <div class="col-lg-5 col-md-6 mb-4 text-start">
+          <h5 class="fw-bold text-pink">Anis MiniShop</h5>
+          <p class="small text-muted">
+            A place for your shining and beauty.  
+            The best makeup products made with love for you.
+          </p>
+
+          <h6 class="fw-bold mb-3 mt-4 text-pink">Join Our Newsletter</h6>
+          <form class="d-flex justify-content-start">
+            <input type="email" class="form-control w-50 me-2" placeholder="Your email" required>
+            <button class="btn btn-primary" type="submit">Join</button>
+          </form>
+          <small class="text-muted d-block mt-2">Get the latest offers and updates</small>
+
+          <p class="small mt-3 mb-0 text-muted">Location: Amsterdam, Netherlands</p>
+        </div>
+
+      </div>
+
+      <hr>
+      <p class="text-center small mt-3 mb-0 text-muted">
+        © 2025 Anis_MiniShop. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- فایل‌های جاوااسکریپت -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+  <script>AOS.init();</script>
+</body>
+</html>
