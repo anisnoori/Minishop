@@ -1,0 +1,26 @@
+{
+  "orders": [
+    {
+      "product": "Lipstick Matte",
+      "status": "Delivered",
+      "statusColor": "success",
+      "icon": "💄"
+    },
+    {
+      "product": "Cherry Blush",
+      "status": "Processing",
+      "statusColor": "warning",
+      "icon": "🌸"
+    },
+    {
+      "product": "Golden Mask",
+      "status": "Pending",
+      "statusColor": "danger",
+      "icon": "🧴"
+    }
+  ],
+  "dailyOffer": {
+    "image": "images/lipstick.jpg",
+    "text": "✨ Get 25% off on all Lipsticks today only!"
+  }
+}
