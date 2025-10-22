@@ -57,7 +57,12 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 // نمایش لیست محصولات در صفحه اصلی
-if (window.location.pathname.includes("index.html")) {
+if (
+  window.location.pathname.endsWith("/") ||
+  window.location.pathname.includes("index.html") ||
+  window.location.pathname.includes("/MiniShop/")
+) {
+
   const list = document.getElementById("product-list");
 
   products.forEach(p => {
@@ -318,3 +323,4 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
 });
 window.checkout=checkout;
+
