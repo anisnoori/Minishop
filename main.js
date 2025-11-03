@@ -251,4 +251,9 @@ const observer = new IntersectionObserver(entries => {
     }
   });
 });
+// 💡 Fix: Keep cart badge updated across all pages
+window.addEventListener("load", updateCartBadge);
+setInterval(updateCartBadge, 1000); // auto-refresh badge if localStorage changes
+
 document.querySelectorAll(".count").forEach(el => observer.observe(el));
+
