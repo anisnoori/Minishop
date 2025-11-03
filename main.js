@@ -106,6 +106,8 @@ function addToCart(id) {
   else cart.push({ ...item, quantity: qty });
 
   localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartBadge();
+
 
   Swal.fire({
     icon: "success",
@@ -115,6 +117,17 @@ function addToCart(id) {
     showConfirmButton: false,
   });
 }
+// 🛒 Update Cart Badge
+function updateCartBadge() {
+  const badge = document.getElementById("cart-badge");
+  if (!badge) return;
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+  badge.textContent = totalQty;
+}
+
+// هنگام بارگذاری صفحه، عدد badge را بروزرسانی کن
+document.addEventListener("DOMContentLoaded", updateCartBadge);
 
 // نمایش محتوای سبد خرید در cart.html
 if (window.location.pathname.includes("cart.html")) {
@@ -323,4 +336,5 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
 });
 window.checkout=checkout;
+
 
