@@ -64,5 +64,32 @@
       this.reset();
     });
   </script>
+  <script>
+document.querySelector("form").addEventListener("submit", e => {
+  const name = document.getElementById("name");
+  const email = document.getElementById("email");
+  const msg = document.getElementById("message");
+
+  if (!name.value.trim()) {
+    e.preventDefault();
+    Swal.fire("Oops!", "Please enter your name!", "warning");
+    return;
+  }
+  if (!email.value.includes("@")) {
+    e.preventDefault();
+    Swal.fire("Invalid Email", "Please enter a valid email address.", "error");
+    return;
+  }
+  if (!msg.value.trim()) {
+    e.preventDefault();
+    Swal.fire("Empty Message", "Please write a message before sending.", "info");
+    return;
+  }
+
+  Swal.fire("Thank you!", "Your message has been sent successfully 💌", "success");
+});
+</script>
+
 </body>
 </html>
+
