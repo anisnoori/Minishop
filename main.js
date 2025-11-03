@@ -1,4 +1,8 @@
-// تعریف محصولات فروشگاه
+// =====================================
+// 💄 Anis MiniShop - Final main.js (Fixed & Improved)
+// =====================================
+
+// 🛍️ Product List
 const products = [
   { id: 1, name: "New Collection", price: 110, img: "images/slider.jpeg" },
   { id: 2, name: "New Collection", price: 67, img: "images/slider2.jpeg" },
@@ -16,20 +20,18 @@ const products = [
   { id: 15, name: "YSL", price: 15.35, img: "images/blush1.jpg" },
   { id: 16, name: "ShineYSL", price: 15.75, img: "images/blush2.jpg" },
   { id: 17, name: "Golden Rose", price: 15.95, img: "images/blush3.jpg" },
-    { id: 18, name: "SkyHigh ", price: 19.75, img: "images/SkyHighMascara.jpeg" },
-  { id: 19, name: "YSL  ", price: 13.75, img: "images/YSL Mascara.jpeg" },
-  { id: 20, name: "Dior ", price: 18.75, img: "images/DiorMascara.jpeg" },
-    { id: 21, name: "Shiglam ", price: 16.75, img: "images/Shiglam.jpeg" },
-
-
+  { id: 18, name: "SkyHigh", price: 19.75, img: "images/SkyHighMascara.jpeg" },
+  { id: 19, name: "YSL Mascara", price: 13.75, img: "images/YSL Mascara.jpeg" },
+  { id: 20, name: "Dior", price: 18.75, img: "images/DiorMascara.jpeg" },
+  { id: 21, name: "Shiglam", price: 16.75, img: "images/Shiglam.jpeg" },
 ];
 
-// تبدیل قیمت به تومان با فرمت فارسی
+// 💰 Format price
 function formatPrice(n) {
   return (n * 60000).toLocaleString("fa-IR") + " Toman";
 }
 
-// ساخت اسلایدر محصولات در صفحه اصلی
+// 🎠 Slider setup (with accessibility)
 window.addEventListener("DOMContentLoaded", () => {
   const sliderContainer = document.getElementById("slider-container");
   if (!sliderContainer) return;
@@ -45,8 +47,8 @@ window.addEventListener("DOMContentLoaded", () => {
     sliderContainer.innerHTML += `
       <div class="carousel-item ${index === 0 ? "active" : ""}">
         <div class="d-flex justify-content-center">
-          <img src="${p.img}" alt="${p.name}" 
-               style="max-height:400px; width:auto; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,0.2);">
+          <img src="${p.img}" alt="${p.name} promotional banner" aria-label="Featured product banner"
+               loading="lazy" style="max-height:400px; width:auto; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,0.2);">
         </div>
         <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 p-2">
           <h5>${p.name}</h5>
@@ -56,7 +58,7 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// نمایش لیست محصولات در صفحه اصلی
+// 🛍️ Display Product List
 if (
   window.location.pathname.endsWith("/") ||
   window.location.pathname.includes("index.html") ||
@@ -69,18 +71,18 @@ if (
     list.innerHTML += `
       <div class="col-md-3 mb-4">
         <div class="card h-100" data-aos="fade-up" data-aos-duration="200">
-          <img src="${p.img}" class="card-img-top" alt="${p.name}">
+          <img src="${p.img}" class="card-img-top" alt="${p.name} product image" loading="lazy">
           <div class="card-body text-center">
             <h5>${p.name}</h5>
             <p>${formatPrice(p.price)}</p>
-            <input id="qty-${p.id}" type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-primary" onclick="addToCart(${p.id})">Add to Cart</button>
+            <input id="qty-${p.id}" type="number" value="1" min="1" class="form-control mb-2" aria-label="Product quantity">
+            <button class="btn btn-primary" onclick="addToCart(${p.id})" aria-label="Add ${p.name} to cart">Add to Cart</button>
           </div>
         </div>
       </div>`;
   });
 
-  // فیلتر کردن محصولات بر اساس جستجو
+  // 🔍 Search Filter
   const search = document.getElementById("search");
   if (search) {
     search.addEventListener("input", e => {
@@ -93,10 +95,9 @@ if (
   }
 }
 
-// گرفتن سبد خرید از localStorage
+// 🛒 Cart
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// افزودن محصول به سبد خرید
 function addToCart(id) {
   const qty = parseInt(document.getElementById(`qty-${id}`).value);
   const item = products.find(p => p.id === id);
@@ -108,7 +109,6 @@ function addToCart(id) {
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartBadge();
 
-
   Swal.fire({
     icon: "success",
     title: "Added",
@@ -117,7 +117,8 @@ function addToCart(id) {
     showConfirmButton: false,
   });
 }
-// 🛒 Update Cart Badge
+
+// 🛍️ Update Cart Badge
 function updateCartBadge() {
   const badge = document.getElementById("cart-badge");
   if (!badge) return;
@@ -125,39 +126,12 @@ function updateCartBadge() {
   const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
   badge.textContent = totalQty;
 }
-
-// هنگام بارگذاری صفحه، عدد badge را بروزرسانی کن
 document.addEventListener("DOMContentLoaded", updateCartBadge);
 
-// نمایش محتوای سبد خرید در cart.html
-if (window.location.pathname.includes("cart.html")) {
-  const container = document.getElementById("cart-items");
-  const totalEl = document.getElementById("cart-total");
-
-  if (cart.length === 0) {
-    container.innerHTML = "<p>Your cart is empty.</p>";
-  } else {
-    let total = 0;
-    cart.forEach(item => {
-      total += item.price * item.quantity;
-      container.innerHTML += `
-        <div class="border-bottom py-2 d-flex justify-content-between">
-          <div>${item.name} (x${item.quantity})</div>
-          <div>${formatPrice(item.price * item.quantity)}</div>
-        </div>`;
-    });
-    totalEl.textContent = `Total: ${formatPrice(total)}`;
-  }
-}
-
-// عملکرد دکمه پرداخت
+// 🧾 Checkout
 function checkout() {
   if (!cart || cart.length === 0) {
-    Swal.fire({
-      icon: 'info',
-      title: 'Your cart is empty!',
-      confirmButtonText: 'ok'
-    });
+    Swal.fire({ icon: 'info', title: 'Your cart is empty!', confirmButtonText: 'ok' });
     return;
   }
 
@@ -173,8 +147,9 @@ function checkout() {
     window.location.href = "index.html";
   });
 }
+window.checkout = checkout;
 
-// تغییر حالت تاریک و روشن سایت
+// 🌙 Theme Toggle
 const toggleBtn = document.getElementById("theme-toggle");
 if (toggleBtn) {
   toggleBtn.addEventListener("click", () => {
@@ -183,158 +158,97 @@ if (toggleBtn) {
     localStorage.setItem("theme", mode);
   });
 
-  if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-mode");
-  }
+  if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-mode");
 }
 
-// نمایش وضعیت آب و هوا با API
+// 🌦 Weather
 const weatherBox = document.getElementById("weather-box");
 const weatherStatus = document.getElementById("weather-status");
 
-// انتخاب پیام متناسب با دمای هوا
 function getWeatherMessage(temp) {
-  if (temp < 5) return "It’s freezing outside! Keep yourself warm.";
-  if (temp < 15) return "A bit chilly today — perfect for a cup of coffee.";
-  if (temp < 25) return "It’s a lovely day — let’s post something inspiring!";
-  if (temp < 35) return "Nice and warm! Don’t forget to stay hydrated.";
-  return "It’s hot out there! Stay cool and take care!";
+  if (temp < 5) return "It’s freezing outside! ❄️";
+  if (temp < 15) return "A bit chilly — perfect for coffee ☕";
+  if (temp < 25) return "It’s a lovely day 🌸";
+  if (temp < 35) return "Nice and warm! Stay hydrated 💧";
+  return "It’s hot! Stay cool 😎";
 }
 
-// دریافت و نمایش داده‌های آب‌وهوا
 function showWeather(lat, lon) {
   weatherStatus.textContent = "Loading weather data...";
-
   fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`)
-    .then(res => {
-      if (!res.ok) throw new Error("Weather API error");
-      return res.json();
-    })
+    .then(res => res.json())
     .then(data => {
-      const weather = data.current_weather;
-      const temp = weather.temperature;
-      const wind = weather.windspeed;
-      const time = new Date(weather.time).toLocaleTimeString();
-      const message = getWeatherMessage(temp);
-
-      let icon = "☀️";
-      if (weather.weathercode >= 51 && weather.weathercode <= 67) icon = "🌧️";
-      else if (weather.weathercode >= 71 && weather.weathercode <= 77) icon = "❄️";
-      else if (weather.weathercode >= 95) icon = "⛈️";
-
+      const w = data.current_weather;
+      const msg = getWeatherMessage(w.temperature);
       weatherBox.innerHTML = `
-        <h5 class="mb-2 text-dark">Your Location</h5>
-        <p class="mb-1">${icon} Temperature: <strong>${temp}°C</strong></p>
-        <p class="mb-1">Wind Speed: ${wind} km/h</p>
-        <p class="text-muted small mb-3">Last updated: ${time}</p>
-        <p class="fw-semibold text-pink">${message}</p>
-      `;
+        <h5>Your Location</h5>
+        <p>🌡 ${w.temperature}°C</p>
+        <p>💨 Wind: ${w.windspeed} km/h</p>
+        <p class="text-pink fw-semibold">${msg}</p>`;
     })
-    .catch(() => {
-      weatherBox.innerHTML = `<p class="text-danger">Failed to load weather data.</p>`;
-    });
+    .catch(() => weatherBox.innerHTML = `<p class="text-danger">Failed to load weather data.</p>`);
 }
 
-// گرفتن موقعیت کاربر با Geolocation
-function getUserLocation() {
-  if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => showWeather(position.coords.latitude, position.coords.longitude),
-      () => {
-        weatherBox.innerHTML = `<p class="text-danger">Unable to detect location. Showing Amsterdam instead.</p>`;
-        showWeather(52.37, 4.90);
-      }
-    );
-  } else {
-    weatherBox.innerHTML = `<p class="text-danger">Geolocation not supported by your browser.</p>`;
-  }
-}
+if (navigator.geolocation)
+  navigator.geolocation.getCurrentPosition(pos => showWeather(pos.coords.latitude, pos.coords.longitude),
+    () => showWeather(52.37, 4.90));
 
-document.addEventListener("DOMContentLoaded", getUserLocation);
-window.checkout = checkout;
-// 💬 Customer Comments Section
+// 💬 Comments
 document.addEventListener("DOMContentLoaded", () => {
-  const commentForm = document.getElementById("comment-form");
-  const commentList = document.getElementById("comment-list");
+  const form = document.getElementById("comment-form");
+  const list = document.getElementById("comment-list");
+  if (!form || !list) return;
 
-  if (!commentForm || !commentList) return;
-
-  // Default example comments
   let comments = JSON.parse(localStorage.getItem("comments")) || [
-    { name: "Sara M.", text: "Loved the lipstick quality 😍 Fast delivery too!" },
-    { name: "Lina P.", text: "Beautiful packaging and lovely shades. Highly recommend 💄" },
-    { name: "Nora A.", text: "Great customer service! My order arrived on time ❤️" }
+    { name: "Sara M.", text: "Loved the lipstick quality 😍" },
+    { name: "Lina P.", text: "Beautiful packaging and shades 💄" },
+    { name: "Nora A.", text: "Fast delivery, great service!" }
   ];
 
-  // Render comments
-  function renderComments() {
-    commentList.innerHTML = "";
-    if (comments.length === 0) {
-      commentList.innerHTML = `<p class="text-muted">No comments yet. Be the first to share your thoughts 💕</p>`;
-      return;
-    }
-    comments.forEach(c => {
-      commentList.innerHTML += `
-        <div class="comment-item">
-          <h6>${c.name}</h6>
-          <p>${c.text}</p>
-        </div>`;
-    });
+  function render() {
+    list.innerHTML = comments.map(c => `
+      <div class="text-start mb-3 p-3 bg-white rounded shadow-sm">
+        <h6 class="fw-semibold text-pink">${c.name}</h6>
+        <p class="mb-0">${c.text}</p>
+      </div>`).join("");
   }
 
-  renderComments();
-
-  // Add new comment
-  commentForm.addEventListener("submit", e => {
+  form.addEventListener("submit", e => {
     e.preventDefault();
     const name = document.getElementById("comment-name").value.trim();
     const text = document.getElementById("comment-text").value.trim();
-
-    if (name && text) {
-      comments.push({ name, text });
-      localStorage.setItem("comments", JSON.stringify(comments));
-      renderComments();
-      commentForm.reset();
-    }
+    if (!name || !text) return;
+    comments.push({ name, text });
+    localStorage.setItem("comments", JSON.stringify(comments));
+    form.reset();
+    render();
   });
+  render();
 });
-// 📊 Statistics Counter Animation
+
+// 📊 Achievement Counter Animation
 function animateCount(el, target) {
   let count = 0;
-  const speed = 60;
+  const speed = 40;
   const increment = Math.ceil(target / speed);
-
   const update = () => {
     count += increment;
-    if (count >= target) {
-      el.innerText = target;
-    } else {
+    if (count >= target) el.innerText = target;
+    else {
       el.innerText = count;
       requestAnimationFrame(update);
     }
   };
-
   update();
 }
-
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       const el = entry.target;
-      el.classList.add('is-visible');
-      const countEl = el.querySelector('.count');
-      const target = parseInt(countEl.innerText);
-      countEl.innerText = '0';
-      animateCount(countEl, target);
+      const target = parseInt(el.dataset.target);
+      animateCount(el, target);
       observer.unobserve(el);
     }
   });
 });
-
-// فعال‌سازی برای همه عناصر شمارنده
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
-});
-window.checkout=checkout;
-
-
+document.querySelectorAll(".count").forEach(el => observer.observe(el));
